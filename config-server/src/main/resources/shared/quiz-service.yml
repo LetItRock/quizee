@@ -1,0 +1,5 @@
+some:
+  value: 'Pupa'
+
+server:
+  port: 8000
