@@ -19,7 +19,7 @@ public class QuizServiceApplication {
 	@Value("${some.value}")
 	private String value;
 
-	@GetMapping(path = "/demo")
+	@GetMapping(path = "/quiz/demo")
 	public String getProp() {
 		return value;
 	}

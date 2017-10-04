@@ -10,8 +10,9 @@
    <name>quizee</name>
 
    <modules>
-      <module>discovery-server</module>
       <module>config-server</module>
+      <module>discovery-server</module>
+      <module>gateway-service</module>
       <module>quiz-service</module>
    </modules>
 

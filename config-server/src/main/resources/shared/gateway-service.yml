@@ -1,0 +1,16 @@
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    quiz-service:
+        path: /quiz/**
+        url: http://localhost:8000
+        serviceId: quiz-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+server:
+  port: 4000
