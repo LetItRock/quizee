@@ -4,10 +4,28 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
+        encrypt:
+          enabled: false # DISABLE DECRYPTION ON SERVER SIDE - CLIENTS WILL DO IT
   profiles:
     active: native
   application:
     name: config-server
+
+# SECURING CONFIGURATION SERVER
+security:
+  basic:
+    enabled: true
+  user:
+    name: config
+    password: password #{CONFIG_SERVER_PASSWORD}
+
+# ENCRYPTION OF SENSITIVE DATA
+encrypt:
+  key-store:
+    location: classpath:/config-server.jks
+    password: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_PASSWORD}
+    alias: config-server-key
+    secret: wzdrowymcielezdrowyduch #{KEY_STORE_SECRET}
 
 server:
   port: 8888
