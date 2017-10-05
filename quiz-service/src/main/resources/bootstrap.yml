@@ -8,5 +8,10 @@ spring:
       username: config
       password: password #${CONFIG_SERVICE_PASSWORD}
 
+# ENCRYPTION OF SENSITIVE DATA
 encrypt:
-  key: supersecretpassword
+  key-store:
+    location: classpath:/config-server.jks
+    password: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_PASSWORD}
+    alias: config-server-key
+    secret: wzdrowymcielezdrowyduch #{KEY_STORE_SECRET}
