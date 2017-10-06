@@ -1,3 +1,4 @@
+# ZUUL PROXY - proxies all requests to services without changing headers
 zuul:
   ignoredServices: '*'
   host:
@@ -5,6 +6,12 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
+    auth-service:
+        path: /uaa/**
+        url: http://localhost:5000
+        stripPrefix: false
+        sensitiveHeaders:
+
     quiz-service:
         path: /quiz/**
         url: http://localhost:8000

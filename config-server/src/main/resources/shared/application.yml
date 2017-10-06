@@ -1,6 +1,22 @@
+# BASE PROPERTIES FOR ALL SERVICES
 logging:
   level:
     org.springframework.security: INFO
+
+# BASE OAUTH ENDPOINT FOR CURRENT PRINCIPAL
+security:
+  # DISABLE BASIC AUTHENTICATION
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoOwrjBVgOw6q9RE8H9sfD54N/vZ13xxnsza193tBq+B99sgl+L87FJFA8FVyF6ezTS5lVlYAEOR/QsidWRHEsNBvMKug/I3HfrD0ujgEKXoAhZiJM/3qbvQrK0HScDO9tSTFI+VjJnG7otNBSfJQ9M7Ji3k873TZC7K0eXlgHsVddZkSewyO6AZZXgnJAgk97RK9DNNiXJ7zutnKYlrcIFQLXKzhviB/qaLgRJqhbgok/YuTxfBF4fHySN7wVwkXqAkFznrqCOwJNUresOK/k5TdXxzmJRN4LiFqoHSOX7JskAIB6F7st5Dk7RS8Pm+714rtsf6jxPgtT/oeM1FuGd7Bmv/60is2ei//V0JVf081Wyx0XuJzrWF6lUZ2R8zbjCRJcxMPOWRbPiLhI04EkIO9M8X04eeKk7UCQ19kIVu0txkMHR6c3/1YRjpfxlivYVdFMPwnQOiFpfDJLRNmxzETrJlYL0BBQCmWnovh5Qa/aceFLkT/LE38eDKYlGFKVypvQarc/gEjSc9k3l2W5gCLwt9bj6txqCQIFR/WhE0BsWuZnFPDqmWgIeyX6bQ039RpCNhYVIRUbd/laL43vOQ0iK87TlCL0CmWd9rL83s71RuZHtXk9Uvu0fVEoj3bo7O2asAnc97hjlJNG7o1aPlff85HuLzPDDOi7KfgiQsCAwEAAQ==
+          -----END PUBLIC KEY-----
+        id: server
 
 eureka:
   instance:

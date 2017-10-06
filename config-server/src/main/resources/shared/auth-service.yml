@@ -1,0 +1,14 @@
+# DB CONFIGURATION
+# spring:
+#   data:
+#     mongodb:
+#       host: http://localhost
+#       username: root
+#       password: root
+#       database: quizee
+#       port: 27017
+
+# CONTEXT PATH FOR AUTH SERVER AND PORT
+server:
+  context-path: /uaa
+  port: 5000
