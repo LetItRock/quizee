@@ -1,12 +1,12 @@
 # DB CONFIGURATION
-# spring:
-#   data:
-#     mongodb:
-#       host: http://localhost
-#       username: root
-#       password: root
-#       database: quizee
-#       port: 27017
+spring:
+  data:
+    mongodb:
+      host: localhost #${MONGO_DB_HOST}
+      #username: root
+      #password: root #${MONGO_DB_PASSWORD}
+      database: quizee
+      port: 27017
 
 # CONTEXT PATH FOR AUTH SERVER AND PORT
 server:

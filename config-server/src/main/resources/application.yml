@@ -22,10 +22,10 @@ security:
 # ENCRYPTION OF SENSITIVE DATA
 encrypt:
   key-store:
-    location: classpath:/config-server.jks
+    location: classpath:/grapeup.jks
     password: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_PASSWORD}
-    alias: config-server-key
-    secret: wzdrowymcielezdrowyduch #{KEY_STORE_SECRET}
+    alias: grapeup
+    secret: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_SECRET}
 
 server:
   port: 8888
