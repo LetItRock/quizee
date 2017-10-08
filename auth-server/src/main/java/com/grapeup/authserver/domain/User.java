@@ -15,7 +15,7 @@ public class User implements UserDetails {
 	@Id
 	private String username;
 	private String password;
-	private boolean isEnabled;
+	private boolean isEnabled = true;
 
 	@Override
 	public String getPassword() {

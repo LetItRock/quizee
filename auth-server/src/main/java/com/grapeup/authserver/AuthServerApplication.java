@@ -39,7 +39,7 @@ import java.security.KeyPair;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) // security on beans, methods; prePostEnables - enables Spring EL
 public class AuthServerApplication {
 
 	public static void main(String[] args) {
@@ -48,7 +48,7 @@ public class AuthServerApplication {
 
 	@Configuration
 	@EnableWebSecurity
-	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER) // resource server config takes precedence over it
 	public class WebSecurityServerConfig extends WebSecurityConfigurerAdapter {
 
 		@Autowired
