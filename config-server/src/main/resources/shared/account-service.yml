@@ -1,0 +1,14 @@
+# DB CONFIGURATION
+spring:
+  data:
+    mongodb:
+      host: localhost #${MONGO_DB_HOST}
+      #username: root
+      #password: root #${MONGO_DB_PASSWORD}
+      database: quizee
+      port: 27017
+
+# CONTEXT PATH FOR ACCOUNT SERVICE AND PORT
+server:
+  context-path: /account
+  port: 8100
