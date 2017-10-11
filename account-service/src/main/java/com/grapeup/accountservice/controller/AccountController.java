@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController {
 
-    @GetMapping
-    @PreAuthorize("#oauth2.hasScope('browser')")
+    @GetMapping(path = "/demo")
+    @PreAuthorize("#oauth2.hasScope('ui')")
     public String demo() {
         return "demo";
     }

@@ -1,19 +1,26 @@
 package com.grapeup.accountservice;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.io.IOException;
 
 @SpringBootApplication
 @EnableDiscoveryClient // it will register this service with eureka
@@ -25,29 +32,41 @@ public class AccountServiceApplication extends ResourceServerConfigurerAdapter {
 		SpringApplication.run(AccountServiceApplication.class, args);
 	}
 
-	@Value("${security.oauth2.resource.jwt.keyValue}")
-	String publicKey;
-
 	@Value("${spring.application.name}")
-	String resourceId;
+	private String resourceId;
 
 	@Bean
-	JwtAccessTokenConverter converter() {
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+	public TokenStore tokenStore() {
+		return new JwtTokenStore(accessTokenConverter());
+	}
+
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		final Resource resource = new ClassPathResource("grapeup.pub");
+		String publicKey = null;
+		try {
+			publicKey = IOUtils.toString(resource.getInputStream());
+		} catch (final IOException e) {
+			throw new RuntimeException(e);
+		}
 		converter.setVerifierKey(publicKey);
 		return converter;
 	}
 
 	@Bean
-	TokenStore tokenStore() {
-		return new JwtTokenStore(converter());
+	@Primary
+	public DefaultTokenServices tokenServices() {
+		final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+		defaultTokenServices.setTokenStore(tokenStore());
+		return defaultTokenServices;
 	}
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources
 				.resourceId(resourceId)
-				.tokenStore(tokenStore());
+				.tokenServices(tokenServices());
 	}
 
 	@Override

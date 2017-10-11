@@ -2,8 +2,8 @@
 security:
   oauth2:
     client:
-      clientId: account-service
-      clientSecret: account-service #${ACCOUNT_SERVICE_PASSWORD}
+      clientId: quiz-service
+      clientSecret: quiz-service #${QUIZ_SERVICE_PASSWORD}
       accessTokenUri: http://localhost:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
@@ -13,4 +13,5 @@ some:
   other: '{cipher}'
 
 server:
+  context-path: /quiz
   port: 8000

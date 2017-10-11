@@ -6,9 +6,10 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
-    auth-service:
+    auth-server:
         path: /uaa/**
         url: http://localhost:5000
+        serviceId: auth-server
         stripPrefix: false
         sensitiveHeaders:
 
@@ -16,6 +17,13 @@ zuul:
         path: /quiz/**
         url: http://localhost:8000
         serviceId: quiz-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    account-service:
+        path: /account/**
+        url: http://localhost:8100
+        serviceId: account-service
         stripPrefix: false
         sensitiveHeaders:
 
