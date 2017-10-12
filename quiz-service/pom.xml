@@ -41,8 +41,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -76,6 +76,7 @@
 				<configuration>
 					<finalName>quiz-service</finalName>
 					<addResources>true</addResources>
+					<excludeDevtools>false</excludeDevtools>
 				</configuration>
 			</plugin>
 			<plugin>
