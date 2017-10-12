@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: account-service
+  cloud:
+    config:
+      enabled: false
+
+security:
+  oauth2:
+    resource:
+      id: test_resource_id
+
+eureka:
+  client:
+    enabled: false
