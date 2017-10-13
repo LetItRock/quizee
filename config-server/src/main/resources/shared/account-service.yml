@@ -4,7 +4,7 @@ security:
     client:
       clientId: account-service
       clientSecret: account-service #${ACCOUNT_SERVICE_PASSWORD}
-      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      accessTokenUri: http://localhost:8000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 
@@ -21,4 +21,4 @@ spring:
 # CONTEXT PATH FOR ACCOUNT SERVICE AND PORT
 server:
   context-path: /account
-  port: 8100
+  port: 8200

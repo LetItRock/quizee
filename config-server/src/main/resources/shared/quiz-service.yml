@@ -4,7 +4,7 @@ security:
     client:
       clientId: quiz-service
       clientSecret: quiz-service #${QUIZ_SERVICE_PASSWORD}
-      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      accessTokenUri: http://localhost:8000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 
@@ -14,4 +14,4 @@ some:
 
 server:
   context-path: /quiz
-  port: 8000
+  port: 8100

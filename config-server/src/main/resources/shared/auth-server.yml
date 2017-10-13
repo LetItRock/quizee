@@ -11,4 +11,4 @@ spring:
 # CONTEXT PATH FOR AUTH SERVER AND PORT
 server:
   context-path: /uaa
-  port: 5000
+  port: 8000

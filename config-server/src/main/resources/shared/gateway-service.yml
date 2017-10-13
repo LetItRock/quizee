@@ -8,21 +8,21 @@ zuul:
   routes:
     auth-server:
         path: /uaa/**
-        url: http://localhost:5000
+        url: http://localhost:8000
         serviceId: auth-server
         stripPrefix: false
         sensitiveHeaders:
 
     quiz-service:
         path: /quiz/**
-        url: http://localhost:8000
+        url: http://localhost:8100
         serviceId: quiz-service
         stripPrefix: false
         sensitiveHeaders:
 
     account-service:
         path: /account/**
-        url: http://localhost:8100
+        url: http://localhost:8200
         serviceId: account-service
         stripPrefix: false
         sensitiveHeaders:

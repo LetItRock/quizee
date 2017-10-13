@@ -64,7 +64,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>discovery-service</finalName>
+					<finalName>gateway-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -10,7 +10,7 @@ security:
     enabled: false
   oauth2:
     resource:
-      user-info-uri: http://localhost:5000/uaa/users/current
+      user-info-uri: http://localhost:8000/uaa/users/current
       id: oauth2_id
 
 eureka:
