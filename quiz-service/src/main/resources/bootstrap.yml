@@ -3,15 +3,7 @@ spring:
     name: quiz-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config-server:8888
       fail-fast: true
       username: config
       password: password #${CONFIG_SERVICE_PASSWORD}
-
-# ENCRYPTION OF SENSITIVE DATA
-encrypt:
-  key-store:
-    location: classpath:/grapeup.jks
-    password: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_PASSWORD}
-    alias: grapeup
-    secret: w0rldcl4sss0ftw4resk1lls #{KEY_STORE_SECRET}
