@@ -1,7 +1,7 @@
-FROM openjdk:jre-8
+FROM openjdk:8-jdk-alpine
 MAINTAINER Pavlo Tymchuk <pawel.tymczuk@gmail.com>
 
-ADD ./target/quiz-service.jar /quizee/
-CMD ["java", "-Xmx200m", "-jar", "/quizee/quiz-service.jar"]
+ADD ./target/quiz-service.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/quiz-service.jar"]
 
 EXPOSE 8100
