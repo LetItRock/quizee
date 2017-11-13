@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  config-server:
+    build: config-server
+    ports:
+      - 8888:8888
+
+  discovery-server:
+    build: discovery-server
+
+  gateway-service:
+    build: gateway-service

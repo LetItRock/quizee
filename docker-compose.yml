@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  config-server:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+    image: letitrock/quizee-config-server
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  discovery-server:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+    image: letitrock/quizee-discovery-server
+    restart: always
+    depends_on:
+      - config-server
+    ports:
+      - 8761:8761
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+    image: letitrock/quizee-gateway-service
+    restart: always
+    depends_on:
+      - config-server
+    ports:
+      - 80:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
