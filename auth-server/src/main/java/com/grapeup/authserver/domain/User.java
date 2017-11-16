@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Pavlo Tymchuk
  */
-@Document
+@Document(collection = "users")
 public class User implements UserDetails {
 	@Id
 	private String username;

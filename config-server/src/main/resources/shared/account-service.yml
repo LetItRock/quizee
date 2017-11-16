@@ -12,9 +12,9 @@ security:
 spring:
   data:
     mongodb:
-      host: localhost #${MONGO_DB_HOST}
-      #username: root
-      #password: root #${MONGO_DB_PASSWORD}
+      host: auth-server-mongodb
+      username: user
+      password: ${MONGODB_PASSWORD}
       database: quizee
       port: 27017
 

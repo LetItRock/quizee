@@ -8,9 +8,18 @@ security:
       grant-type: client_credentials
       scope: server
 
+# DB CONFIGURATION
+spring:
+  data:
+    mongodb:
+      host: quiz-service-mongodb
+      username: user
+      password: ${MONGODB_PASSWORD}
+      database: quizee
+      port: 27017
+
 some:
   value: 'Pupa'
-  other: '{cipher}'
 
 server:
   context-path: /quiz

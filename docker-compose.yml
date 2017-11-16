@@ -38,3 +38,81 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  auth-server-mongodb:
+    environment:
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-mongodb
+    restart: always
+    ports:
+      - 28000:27017 # TODO REMOVE FROM HERE
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  auth-server:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-auth-server
+    restart: always
+    depends_on:
+      - config-server
+      - auth-server-mongodb
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-service-mongodb:
+    environment:
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-mongodb
+    restart: always
+    ports:
+      - 29000:27017 # TODO REMOVE FROM HERE
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-account-service
+    restart: always
+    depends_on:
+      - config-server
+      - account-service-mongodb
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  quiz-service-mongodb:
+    environment:
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-mongodb
+    restart: always
+    ports:
+      - 30000:27017 # TODO REMOVE FROM HERE
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  quiz-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+      MONGODB_PASSWORD: root
+    image: letitrock/quizee-quiz-service
+    restart: always
+    depends_on:
+      - config-server
+      - quiz-service-mongodb
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

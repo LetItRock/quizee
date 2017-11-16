@@ -11,3 +11,33 @@ services:
 
   gateway-service:
     build: gateway-service
+
+  auth-server-mongodb:
+    build: mongodb
+    ports:
+      - 28000:27017
+
+  auth-server:
+    build: auth-server
+    ports:
+      - 8000:8000
+
+  account-service-mongodb:
+    build: mongodb
+    ports:
+      - 29000:27017
+
+  account-service:
+    build: account-service
+    ports:
+      - 8200:8200
+
+  quiz-service-mongodb:
+    build: mongodb
+    ports:
+      - 30000:27017
+
+  quiz-service:
+    build: quiz-service
+    ports:
+      - 8100:8100

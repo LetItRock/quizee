@@ -19,7 +19,7 @@ public class MongoDbConfiguration {
             long accountsCount = accountRepository.count();
             if (accountsCount <= 0) {
                 Account adminAccount = new Account();
-                adminAccount.setEmail("paty@grapeup.com");
+                adminAccount.setEmail("admin@admin.com");
                 adminAccount.setName("Pavlo");
                 adminAccount.setSurname("Tymchuk");
                 adminAccount.setPhoneNumber("121212121");
