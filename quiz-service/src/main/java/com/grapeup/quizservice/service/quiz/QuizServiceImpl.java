@@ -14,7 +14,7 @@ public class QuizServiceImpl implements QuizService {
     private QuizRepository quizRepository;
 
     @Override
-    public Page<Quiz> getAllQuizzes(Pageable pageable) {
+    public Page<Quiz> getAllActiveQuizzes(Pageable pageable) {
         return  quizRepository.findByActive(true, pageable);
     }
 }

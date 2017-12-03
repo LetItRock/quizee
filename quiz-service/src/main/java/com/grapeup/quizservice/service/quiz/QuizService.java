@@ -5,5 +5,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface QuizService {
-    Page<Quiz> getAllQuizzes(Pageable pageable);
+    Page<Quiz> getAllActiveQuizzes(Pageable pageable);
 }

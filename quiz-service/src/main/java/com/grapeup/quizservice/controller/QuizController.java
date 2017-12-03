@@ -29,8 +29,8 @@ public class QuizController {
 
     @GetMapping(path = "/active")
     @PreAuthorize("#oauth2.hasScope('ui')")
-    public Page<QuizDto> getAllQuizzes(Pageable pageable) {
-        return new PageImpl<>(convertToDtos(quizService.getAllQuizzes(pageable)));
+    public Page<QuizDto> getAllActiveQuizzes(Pageable pageable) {
+        return new PageImpl<>(convertToDtos(quizService.getAllActiveQuizzes(pageable)));
     }
 
     private List<QuizDto> convertToDtos(Page<Quiz> quizPage) {

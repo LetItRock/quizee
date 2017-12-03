@@ -17,8 +17,14 @@ import java.time.LocalDateTime;
 public class Quiz {
     @Id
     private String id;
-    private boolean active;
     private String name;
+    private String shortDescription;
+    private String description;
+    private String icon;
+    private long duration; // in ms
+    private long points;
+    private boolean active;
+    private boolean showResult;
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime updated = LocalDateTime.now();
 }
