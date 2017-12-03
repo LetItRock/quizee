@@ -12,7 +12,7 @@ security:
 spring:
   data:
     mongodb:
-      host: auth-server-mongodb
+      host: account-service-mongodb
       username: user
       password: ${MONGODB_PASSWORD}
       database: quizee

@@ -1,0 +1,15 @@
+package com.grapeup.quizservice.config;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class QuizConfig {
+
+    @Bean
+    public ModelMapper getModelMapper() {
+        return new ModelMapper();
+    }
+
+}

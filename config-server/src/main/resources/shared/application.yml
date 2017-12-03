@@ -19,3 +19,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery-server:8761/eureka/
+
+# this ensures that LocalDateTime object is mapped to json like 2017-01-25T21:34:55
+spring:
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false

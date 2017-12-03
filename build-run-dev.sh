@@ -4,7 +4,7 @@
 mvn clean package -Dmaven.test.skip=true
 
 # Remove dangling images <none>:<none>
-docker rmi $(docker images -f "dangling=true" -q)
+docker rmi -f $(docker images -f "dangling=true" -q)
 
 # Build docker images
 docker build -t letitrock/quizee-account-service ./account-service
