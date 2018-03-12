@@ -41,7 +41,7 @@ services:
 
   auth-server-mongodb:
     environment:
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-mongodb
     restart: always
     ports:
@@ -54,7 +54,7 @@ services:
   auth-server:
     environment:
       CONFIG_SERVICE_PASSWORD: pass
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-auth-server
     restart: always
     depends_on:
@@ -67,7 +67,7 @@ services:
 
   account-service-mongodb:
     environment:
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-mongodb
     restart: always
     ports:
@@ -80,7 +80,7 @@ services:
   account-service:
     environment:
       CONFIG_SERVICE_PASSWORD: pass
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-account-service
     restart: always
     depends_on:
@@ -93,7 +93,7 @@ services:
 
   quiz-service-mongodb:
     environment:
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-mongodb
     restart: always
     ports:
@@ -106,7 +106,7 @@ services:
   quiz-service:
     environment:
       CONFIG_SERVICE_PASSWORD: pass
-      MONGODB_PASSWORD: root
+      MONGODB_PASSWORD: pass
     image: letitrock/quizee-quiz-service
     restart: always
     depends_on:

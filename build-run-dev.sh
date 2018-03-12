@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build whole project
-mvn clean package -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true -DskipTests
 
 # Remove dangling images <none>:<none>
 docker rmi -f $(docker images -f "dangling=true" -q)

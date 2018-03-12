@@ -12,7 +12,7 @@ echo "setup mongodb auth"
 create_user="if (!db.getUser('user')) { db.createUser({ user: 'user', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'quizee'} ]}) }"
 until mongo quizee --eval "$create_user" || mongo quizee $auth --eval "$create_user"; do sleep 5; done
 killall mongod
-sleep 1
+sleep 10s
 killall -9 mongod
 ) &
 
@@ -28,6 +28,6 @@ echo "start mongodb without auth"
 chown -R mongodb /data/db
 gosu mongodb mongod "$@"
 
-echo "restarting with auth on"
-sleep 5
+echo "restarting with authentication on"
+sleep 10s
 exec gosu mongodb mongod --auth "$@"

@@ -1,4 +1,4 @@
-FROM mongo:3
+FROM mongo:3.0
 MAINTAINER Pavlo Tymchuk <pawel.tymczuk@gmail.com>
 
 ADD init.sh /init.sh
@@ -11,5 +11,6 @@ RUN \
  apt-get autoremove -y && apt-get clean && \
  rm -rf /var/cache/* && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 27017
 ENTRYPOINT ["/init.sh"]
+
+EXPOSE 27017
