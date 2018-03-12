@@ -16,14 +16,20 @@ public class MongoDbConfiguration {
     @Bean
     CommandLineRunner preLoadMongoDB() {
         return args -> {
-            long accountsCount = accountRepository.count();
-            if (accountsCount <= 0) {
-                Account adminAccount = new Account();
-                adminAccount.setEmail("admin@admin.com");
-                adminAccount.setName("Pavlo");
-                adminAccount.setSurname("Tymchuk");
-                adminAccount.setPhoneNumber("121212121");
-                accountRepository.save(adminAccount);
+            String email = "admin@admin.com";
+            Account adminAccount = accountRepository.findByEmail(email);
+            if (adminAccount == null) {
+                Account admin =
+                        Account
+                                .builder()
+                                .id("1")
+                                .email(email)
+                                .name("Pavlo")
+                                .surname("Tymchuk")
+                                .phoneNumber("121212121")
+                                .additionalInfo("From AGHacks")
+                                .build();
+                accountRepository.save(admin);
             }
         };
     }

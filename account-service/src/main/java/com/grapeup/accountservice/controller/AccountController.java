@@ -1,15 +1,28 @@
 package com.grapeup.accountservice.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.grapeup.accountservice.domain.Account;
+import com.grapeup.accountservice.dto.AccountDto;
+import com.grapeup.accountservice.service.AccountService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 public class AccountController {
 
-    @GetMapping(path = "/demo")
-    @PreAuthorize("#oauth2.hasScope('ui')")
-    public String demo() {
-        return "demo";
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @PostMapping(path = "/create")
+    public AccountDto create(@Valid @RequestBody AccountDto accountDto) {
+        Account newAccount = accountService.create(modelMapper.map(accountDto, Account.class));
+        return modelMapper.map(newAccount, AccountDto.class);
     }
 }

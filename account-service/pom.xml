@@ -48,21 +48,56 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+		<!-- SPRING DATA MONGODB -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<!-- FOR CREATING Q-CLASSES AT COMPILE TIME. THEY ARE USED FOR QUERIES -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-mongodb</artifactId>
+			<version>4.1.4</version>
+		</dependency>
+		<!-- TO GENERATE Q-CLASSES -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<version>4.1.4</version>
+		</dependency>
+		<!-- END OF SPRING DATA MONGODB -->
+		<!-- UTILS -->
+		<!-- LOMBOK USED TO GENERATE GETTERS, SETTERS, BUILDER ETC. -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.8</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- MODELMAPPER IS USED TO MAP ENTITY TO DTO OBJECTS -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<!-- WHEN SPRING BOOT SEES THIS LIBRARY IT WILL USE CONVERTER FOR LOCALDATETIME OBJECTS -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<!-- END OF UTILS -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
