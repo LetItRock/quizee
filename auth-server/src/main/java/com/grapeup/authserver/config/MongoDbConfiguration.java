@@ -20,14 +20,15 @@ public class MongoDbConfiguration {
     @Bean
     CommandLineRunner preLoadMongoDB() {
         return args -> {
-            long usersCount = userRepository.count();
-            System.out.println("USERS COUNT----------->" + usersCount);
-            if (usersCount <= 0) {
-                User user = new User();
-                user.setEnabled(true);
-                user.setUsername("admin@admin.com");
-                user.setPassword(encoder.encode("pass"));
-                userRepository.save(user);
+            String username = "admin@admin.com";
+            User oldAdmin = userRepository.findByUsername(username);
+            if (oldAdmin == null) {
+                System.out.println("CREATING ADMIN USER ----------->" + username);
+                User admin = new User();
+                admin.setEnabled(true);
+                admin.setUsername(username);
+                admin.setPassword(encoder.encode("pass"));
+                userRepository.save(admin);
             }
         };
     }

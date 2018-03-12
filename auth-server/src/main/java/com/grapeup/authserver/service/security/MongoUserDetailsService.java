@@ -24,6 +24,8 @@ public class MongoUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		User user = repository.findOne(username);
 
+		// TODO implement ADMIN rights based on authorities from UserDetails
+
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
 		}
