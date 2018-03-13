@@ -14,3 +14,9 @@ RUN \
 ENTRYPOINT ["/init.sh"]
 
 EXPOSE 8000
+
+# DEBUG
+# ENV JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5001 -Djava.security.egd=file:/dev/./urandom"
+# ENTRYPOINT ["/init.sh $JAVA_OPTS"]
+# EXPOSE 8200
+# EXPOSE 5001

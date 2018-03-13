@@ -21,6 +21,7 @@ services:
     build: auth-server
     ports:
       - 8000:8000
+      - 5001:5001 # TODO FOR DEBUG PURPOSE - REMOVE IN FUTURE
 
   account-service-mongodb:
     build: mongodb
@@ -31,6 +32,7 @@ services:
     build: account-service
     ports:
       - 8200:8200
+      - 5002:5002 # TODO FOR DEBUG PURPOSE - REMOVE IN FUTURE
 
   quiz-service-mongodb:
     build: mongodb
@@ -41,3 +43,4 @@ services:
     build: quiz-service
     ports:
       - 8100:8100
+      - 5003:5003 # TODO FOR DEBUG PURPOSE - REMOVE IN FUTURE

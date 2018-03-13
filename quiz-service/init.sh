@@ -5,4 +5,4 @@ while [ $(curl -s -o /dev/null -I -w "%{http_code}" "$url") != 200 ]; do
 sleep 1;
 done
 
-java -Xmx200m -jar /app/quiz-service.jar
+java $1 -Xmx200m -jar /app/quiz-service.jar
