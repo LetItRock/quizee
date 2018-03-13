@@ -36,11 +36,14 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.io.IOException;
 
+/**
+ * Resource service - application which holds protected resources
+ */
 @SpringBootApplication
 @EnableDiscoveryClient // it will register this service with eureka
-@EnableResourceServer
-@EnableOAuth2Client
-@EnableFeignClients
+@EnableResourceServer // enables spring security filter chain for oauth resource servers to check token (needs ResourceServerConfigurerAdapter)
+@EnableOAuth2Client // enables configuration for oauth client
+@EnableFeignClients // scans for interfaces for feign clients
 @EnableConfigurationProperties
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
