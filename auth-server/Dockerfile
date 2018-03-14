@@ -11,12 +11,10 @@ RUN \
  apk add --no-cache bash && \
  apk add --no-cache curl
 
-ENTRYPOINT ["/init.sh"]
-
-EXPOSE 8000
+# ENTRYPOINT ["/init.sh"]
+# EXPOSE 8000
 
 # DEBUG
-# ENV JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5001 -Djava.security.egd=file:/dev/./urandom"
-# ENTRYPOINT ["/init.sh $JAVA_OPTS"]
-# EXPOSE 8200
-# EXPOSE 5001
+ENTRYPOINT ["/init.sh"]
+EXPOSE 8200
+EXPOSE 5001
