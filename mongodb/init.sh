@@ -1,33 +1,24 @@
 #!/bin/bash
-if test -z "$MONGODB_PASSWORD"; then
-    echo "MONGODB_PASSWORD not defined"
-    exit 1
+set -m
+
+mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE"
+cmd="$mongodb_cmd --httpinterface --rest --master"
+if [ "$AUTH" == "yes" ]; then
+    cmd="$cmd --auth"
 fi
 
-auth="-u user -p $MONGODB_PASSWORD"
-
-# MONGODB USER CREATION
-(
-echo "setup mongodb auth"
-create_user="if (!db.getUser('user')) { db.createUser({ user: 'user', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'quizee'} ]}) }"
-until mongo quizee --eval "$create_user" || mongo quizee $auth --eval "$create_user"; do sleep 5; done
-killall mongod
-sleep 10s
-killall -9 mongod
-) &
-
-# INIT DUMP EXECUTION
-(
-if test -n "$INIT_DUMP"; then
-    echo "execute dump file"
-	until mongo quizee $auth $INIT_DUMP; do sleep 5; done
+if [ "$JOURNALING" == "no" ]; then
+    cmd="$cmd --nojournal"
 fi
-) &
 
-echo "start mongodb without auth"
-chown -R mongodb /data/db
-gosu mongodb mongod "$@"
+if [ "$OPLOG_SIZE" != "" ]; then
+    cmd="$cmd --oplogSize $OPLOG_SIZE"
+fi
 
-echo "restarting with authentication on"
-sleep 10s
-exec gosu mongodb mongod --auth "$@"
+$cmd &
+
+if [ ! -f /data/db/.mongodb_password_set ]; then
+    /change_password.sh
+fi
+
+fg

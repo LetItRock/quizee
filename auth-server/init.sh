@@ -5,7 +5,7 @@ while [ $(curl -s -o /dev/null -I -w "%{http_code}" "$url") != 200 ]; do
 sleep 1;
 done
 
-JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5001 -Djava.security.egd=file:/dev/./urandom";
-java $JAVA_OPTS -Xmx200m -jar /app/auth-server.jar
+# JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5001 -Djava.security.egd=file:/dev/./urandom";
+# java $JAVA_OPTS -Xmx200m -jar /app/auth-server.jar
 
-# java -Xmx200m -jar /app/auth-server.jar
+java -Xmx200m -jar /app/auth-server.jar

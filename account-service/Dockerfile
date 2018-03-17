@@ -11,10 +11,7 @@ RUN \
  apk add --no-cache bash && \
  apk add --no-cache curl
 
-#ENTRYPOINT ["/init.sh"]
-#EXPOSE 8200
-
 # DEBUG
 ENTRYPOINT ["/init.sh"]
 EXPOSE 8200
-EXPOSE 5002
+#EXPOSE 5002
