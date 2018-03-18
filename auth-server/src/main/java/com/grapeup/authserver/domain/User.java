@@ -3,9 +3,14 @@ package com.grapeup.authserver.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Pavlo Tymchuk
@@ -16,6 +21,7 @@ public class User implements UserDetails {
 	private String username;
 	private String password;
 	private boolean isEnabled = true;
+	private List<String> roles = new ArrayList<>();
 
 	@Override
 	public String getPassword() {
@@ -27,9 +33,17 @@ public class User implements UserDetails {
 		return username;
 	}
 
+	public void addRole(String role) {
+		Assert.notNull(role, "Role cannot be null");
+		this.roles.add(role);
+	}
+
 	@Override
 	public List<GrantedAuthority> getAuthorities() {
-		return null;
+		return roles
+				.stream()
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
 	public void setUsername(String username) {

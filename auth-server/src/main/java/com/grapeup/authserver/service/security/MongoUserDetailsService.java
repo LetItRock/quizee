@@ -1,5 +1,6 @@
 package com.grapeup.authserver.service.security;
 
+import com.grapeup.authserver.domain.Roles;
 import com.grapeup.authserver.domain.User;
 import com.grapeup.authserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,14 @@ public class MongoUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		User user = repository.findOne(username);
-
-		// TODO implement ADMIN rights based on authorities from UserDetails
-
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
+		}
+
+		if (username.equals("admin@admin.com")) {
+			user.addRole(Roles.ROLE_ADMIN.name());
+		} else {
+			user.addRole(Roles.ROLE_USER.name());
 		}
 
 		return user;
