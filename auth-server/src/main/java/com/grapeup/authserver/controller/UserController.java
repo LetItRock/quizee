@@ -27,8 +27,8 @@ public class UserController {
 		return principal;
 	}
 
-	@PreAuthorize("#oauth2.hasScope('server')")
 	@PostMapping
+	@PreAuthorize("#oauth2.hasScope('server')")
 	public void createUser(@Valid @RequestBody User user) {
 		userService.create(user);
 	}

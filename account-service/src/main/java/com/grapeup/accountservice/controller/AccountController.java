@@ -24,6 +24,7 @@ public class AccountController {
     private ModelMapper modelMapper;
 
     @PostMapping(path = "/create")
+    @PreAuthorize("#oauth2.hasScope('ui')")
     public AccountDto create(@Valid @RequestBody AccountDto accountDto) {
         Account newAccount = accountService.create(modelMapper.map(accountDto, Account.class));
         return modelMapper.map(newAccount, AccountDto.class);
