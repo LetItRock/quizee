@@ -1,6 +1,7 @@
 package com.grapeup.quizservice.domain;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,11 +22,11 @@ import java.time.LocalDateTime;
 public class Quiz {
     @Id
     private String id;
-    @Indexed(unique = true) @NotNull @Min(4) @Max(64)
+    @Indexed(unique = true) @NotNull @Length(min = 4, max = 64)
     private String name;
-    @NotNull @Min(4) @Max(300)
+    @NotNull @Length(min = 4, max = 300)
     private String shortDescription;
-    @NotNull @Min(4) @Max(3000)
+    @NotNull @Length(min = 4, max = 3000)
     private String description;
     private String icon;
     private long duration; // in ms

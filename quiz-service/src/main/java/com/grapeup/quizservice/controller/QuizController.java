@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class QuizController {
@@ -25,9 +23,15 @@ public class QuizController {
         return quizService.getAllActiveQuizzes(pageable);
     }
 
+    @PutMapping(path = "/{quizId}")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
+    public QuizDto updateQuiz(@PathVariable("quizId") String quizId, @RequestBody QuizDto quizDto) {
+        return quizService.updateQuiz(quizId, quizDto);
+    }
+
     @PostMapping(path = "/create")
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
-    public QuizDto createQuiz(QuizDto quizDto) {
+    public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
         return quizService.createQuiz(quizDto);
     }
 }

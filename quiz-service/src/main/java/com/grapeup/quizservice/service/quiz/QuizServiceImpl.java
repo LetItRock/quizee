@@ -9,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,26 @@ public class QuizServiceImpl implements QuizService {
     public QuizDto createQuiz(QuizDto quizDto) {
         quizDto.setId(null);
         Quiz quiz = modelMapper.map(quizDto, Quiz.class);
+        quiz.setCreated(LocalDateTime.now());
+        quiz.setUpdated(LocalDateTime.now());
+        return modelMapper.map(quizRepository.save(quiz), QuizDto.class);
+    }
+
+    @Override
+    public QuizDto updateQuiz(String quizId, QuizDto quizDto) {
+        Quiz quiz = quizRepository.findOne(quizId);
+        Assert.notNull(quiz, "Cannot find quiz with id: " + quizId);
+        quiz.setUpdated(LocalDateTime.now());
+
+        quiz.setName(quizDto.getName());
+        quiz.setShortDescription(quizDto.getShortDescription());
+        quiz.setDescription(quizDto.getDescription());
+        quiz.setDuration(quizDto.getDuration());
+        quiz.setPoints(quizDto.getPoints());
+        quiz.setIcon(quizDto.getIcon());
+        quiz.setShowResult(quizDto.isShowResult());
+        quiz.setActive(quizDto.isActive());
+
         return modelMapper.map(quizRepository.save(quiz), QuizDto.class);
     }
 
