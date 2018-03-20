@@ -56,6 +56,13 @@ public class QuizServiceImpl implements QuizService {
         return modelMapper.map(quizRepository.save(quiz), QuizDto.class);
     }
 
+    @Override
+    public void deleteQuiz(String quizId) {
+        Quiz quiz = quizRepository.findOne(quizId);
+        Assert.notNull(quiz, "Cannot find quiz with id: " + quizId);
+        quizRepository.delete(quiz);
+    }
+
     private List<QuizDto> convertToDtos(Page<Quiz> quizPage) {
         return quizPage
                 .getContent()

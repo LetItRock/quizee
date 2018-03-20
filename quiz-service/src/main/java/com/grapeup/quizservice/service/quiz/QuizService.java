@@ -10,4 +10,6 @@ public interface QuizService {
     QuizDto createQuiz(QuizDto quizDto);
 
     QuizDto updateQuiz(String quizId, QuizDto quizDto);
+
+    void deleteQuiz(String quizId);
 }
