@@ -32,4 +32,6 @@ public class Quiz extends BaseEntity {
     private boolean showResult;
     @DBRef
     private List<Label> labels;
+    @DBRef
+    private List<Question> questions;
 }

@@ -3,6 +3,7 @@ package com.grapeup.quizservice.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class QuizDto {
@@ -15,6 +16,8 @@ public class QuizDto {
     private long points;
     private boolean active;
     private boolean showResult;
+    private List<LabelDto> labels;
+    private List<QuestionDto> questions;
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime updated = LocalDateTime.now();
 }

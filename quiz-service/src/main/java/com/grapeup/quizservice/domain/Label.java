@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Document(collection = "labels")
 @Builder(toBuilder = true)
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class Label extends BaseEntity{
+public class Label extends BaseEntity {
     @Indexed(unique = true) @NotNull @Length(min = 4, max = 64)
     private String name;
 }

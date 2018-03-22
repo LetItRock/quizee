@@ -18,13 +18,16 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class Question extends BaseEntity {
-    @NotNull @Length(min = 4, max = 1000)
+    @NotNull @Length(min = 4, max = 3000)
     private String body;
     @NotNull
     private int points;
+    @Length(min = 4, max = 3000)
+    private String explanation;
+    private boolean isMarkdownEnabled;
     @NotNull
     private Type type = Type.SINGLE;
-    private List<String> options = new ArrayList<>();
+    private List<Option> options = new ArrayList<>();
     private List<Answer> answers = new ArrayList<>();
     @DBRef
     private List<Label> labels;
