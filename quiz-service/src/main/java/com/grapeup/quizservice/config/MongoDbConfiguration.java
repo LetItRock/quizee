@@ -1,6 +1,8 @@
 package com.grapeup.quizservice.config;
 
 import com.grapeup.quizservice.domain.*;
+import com.grapeup.quizservice.domain.pojo.Answer;
+import com.grapeup.quizservice.domain.pojo.Option;
 import com.grapeup.quizservice.repository.LabelRepository;
 import com.grapeup.quizservice.repository.QuestionRepository;
 import com.grapeup.quizservice.repository.QuizRepository;

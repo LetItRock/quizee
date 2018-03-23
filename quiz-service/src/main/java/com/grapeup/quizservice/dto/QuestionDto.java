@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class QuestionDto {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
     private String body;
     private int points;

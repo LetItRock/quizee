@@ -1,4 +1,4 @@
-package com.grapeup.quizservice.domain;
+package com.grapeup.quizservice.domain.pojo;
 
 import lombok.*;
 
@@ -9,9 +9,7 @@ import lombok.*;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Answer {
+public class Option {
     private int order;
-    private String stringAnswer;
-    private int integerAnswer;
-    private boolean booleanAnswer;
+    private String text;
 }
