@@ -2,10 +2,10 @@ package com.grapeup.quizservice.domain;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -30,8 +30,14 @@ public class Quiz extends BaseEntity {
     private long points;
     private boolean active;
     private boolean showResult;
-    @DBRef
-    private List<Label> labels;
+    private List<String> labels;
     @DBRef
     private List<Question> questions;
+
+    public void addLabel(String label) {
+        Assert.notNull(label, "Label cannot be null.");
+        if(!labels.contains(label)) {
+            labels.add(label);
+        }
+    }
 }

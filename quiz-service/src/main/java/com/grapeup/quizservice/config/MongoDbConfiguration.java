@@ -1,9 +1,9 @@
 package com.grapeup.quizservice.config;
 
-import com.grapeup.quizservice.domain.*;
+import com.grapeup.quizservice.domain.Question;
+import com.grapeup.quizservice.domain.Quiz;
 import com.grapeup.quizservice.domain.pojo.Answer;
 import com.grapeup.quizservice.domain.pojo.Option;
-import com.grapeup.quizservice.repository.LabelRepository;
 import com.grapeup.quizservice.repository.QuestionRepository;
 import com.grapeup.quizservice.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +23,16 @@ public class MongoDbConfiguration {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @Autowired
-    private LabelRepository labelRepository;
-
     @Bean
     public CommandLineRunner fillDatabase() {
         return strings -> {
-            List<Label> labelsInDB = createLabelsInDB();
+            List<String> labelsInDB = createLabelsInDB();
             List<Question> questionsInDB = createQuestionsInDB(labelsInDB);
             createQuizzesInDB(questionsInDB, labelsInDB);
         };
     }
 
-    private void createQuizzesInDB(List<Question> questionsInDB, List<Label> labelsInDB) {
+    private void createQuizzesInDB(List<Question> questionsInDB, List<String> labelsInDB) {
         long count = quizRepository.count();
         String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Donec pharetra rhoncus mauris non tristique. " +
@@ -67,7 +64,7 @@ public class MongoDbConfiguration {
         }
     }
 
-    private List<Question> createQuestionsInDB(List<Label> labelsInDB) {
+    private List<Question> createQuestionsInDB(List<String> labelsInDB) {
         List<Question> result = new ArrayList<>();
         long questionsCount = questionRepository.count();
         if (questionsCount <= 0) {
@@ -121,17 +118,10 @@ public class MongoDbConfiguration {
         return result;
     }
 
-    private List<Label> createLabelsInDB() {
-        List<Label> result = new ArrayList<>();
-        long labelsCount = labelRepository.count();
-        if (labelsCount <= 0) {
-            Label labelJS = Label.builder().name("JavaScript").build();
-            labelJS.setId("1");
-            result.add(labelRepository.save(labelJS));
-            Label labelJava = Label.builder().name("Java").build();
-            labelJava.setId("2");
-            result.add(labelRepository.save(labelJava));
-        }
+    private List<String> createLabelsInDB() {
+        List<String> result = new ArrayList<>();
+        result.add("JavaScript");
+        result.add("Java");
         return result;
     }
 

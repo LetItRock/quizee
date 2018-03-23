@@ -5,7 +5,6 @@ import com.grapeup.quizservice.domain.pojo.Option;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
@@ -35,10 +34,9 @@ public class Question extends BaseEntity {
     private List<Option> options = new ArrayList<>();
     @NotNull @NotEmpty
     private List<Answer> answers = new ArrayList<>();
-    @DBRef
-    private List<Label> labels = new ArrayList<>();
+    private List<String> labels = new ArrayList<>();
 
-    public void addLabel(Label label) {
+    public void addLabel(String label) {
         Assert.notNull(label, "Label cannot be null.");
         if(!labels.contains(label)) {
             labels.add(label);

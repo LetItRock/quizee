@@ -18,7 +18,7 @@ public class QuestionDto {
     private List<OptionDto> options;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<AnswerDto> answers;
-    private List<LabelDto> labels;
+    private List<String> labels;
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime updated = LocalDateTime.now();
 }

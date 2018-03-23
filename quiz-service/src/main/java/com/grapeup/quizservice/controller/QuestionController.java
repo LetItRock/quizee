@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/question")
+import java.util.List;
+
+@RestController
+@RequestMapping("/question")
 public class QuestionController {
 
     @Autowired
@@ -27,5 +27,11 @@ public class QuestionController {
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
     public Page<QuestionDto> getQuestions(Pageable pagable) {
         return questionService.qetQuestions(pagable);
+    }
+
+    @GetMapping("/labels")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
+    public List<QuestionDto> findQuestionsByLabels(@RequestParam("name") List<String> labels) {
+        return questionService.findQuesionsByLabels(labels);
     }
 }

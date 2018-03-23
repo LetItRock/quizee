@@ -18,7 +18,7 @@ public class QuizDto {
     private long points;
     private boolean active;
     private boolean showResult;
-    private List<LabelDto> labels;
+    private List<String> labels;
     private List<QuestionDto> questions;
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime updated = LocalDateTime.now();

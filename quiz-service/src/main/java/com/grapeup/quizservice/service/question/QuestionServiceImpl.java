@@ -3,7 +3,6 @@ package com.grapeup.quizservice.service.question;
 import com.grapeup.quizservice.domain.Question;
 import com.grapeup.quizservice.dto.QuestionDto;
 import com.grapeup.quizservice.repository.QuestionRepository;
-import com.grapeup.quizservice.service.label.LabelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,9 +19,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
-    private LabelService labelService;
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -42,9 +38,18 @@ public class QuestionServiceImpl implements QuestionService {
         );
     }
 
+    @Override
+    public List<QuestionDto> findQuesionsByLabels(List<String> labels) {
+        List<Question> questions = questionRepository.findByLabelsIn(labels);
+        return convertToDtos(questions);
+    }
+
     private List<QuestionDto> convertToDtos(Page<Question> quizPage) {
+        return convertToDtos(quizPage.getContent());
+    }
+
+    private List<QuestionDto> convertToDtos(List<Question> quizPage) {
         return quizPage
-                .getContent()
                 .stream()
                 .map(quiz -> modelMapper.map(quiz, QuestionDto.class))
                 .collect(Collectors.toList());
@@ -52,18 +57,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     private Question getQuestionFromDto(QuestionDto questionDto) {
         questionDto.setId(null);
-        Question question = modelMapper.map(questionDto, Question.class);
-        // because of wrong mapping between dto and entity
-        // those labels from dto don't have id
-        question.getLabels().clear();
-        fillQuestionEntityWithLabels(questionDto, question);
-        return question;
-    }
-
-    private void fillQuestionEntityWithLabels(QuestionDto questionDto, Question question) {
-        questionDto.getLabels().forEach(labelDto -> {
-            String labelName = labelDto.getName();
-            question.addLabel(labelService.getOrCreateLabel(labelName));
-        });
+        return modelMapper.map(questionDto, Question.class);
     }
 }

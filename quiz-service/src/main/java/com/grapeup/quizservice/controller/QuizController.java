@@ -18,25 +18,25 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-    @GetMapping(path = "/active")
+    @GetMapping("/active")
     @PreAuthorize("#oauth2.hasScope('ui')")
     public Page<QuizDto> getAllActiveQuizzes(Pageable pageable) {
         return quizService.getAllActiveQuizzes(pageable);
     }
 
-    @PutMapping(path = "/{quizId}")
+    @PutMapping("/{quizId}")
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
     public QuizDto updateQuiz(@PathVariable("quizId") String quizId, @RequestBody QuizDto quizDto) {
         return quizService.updateQuiz(quizId, quizDto);
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping("/create")
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
     public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
         return quizService.createQuiz(quizDto);
     }
 
-    @DeleteMapping(path = "/{quizId}")
+    @DeleteMapping("/{quizId}")
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteQuiz(@PathVariable("quizId") String quizId) {
