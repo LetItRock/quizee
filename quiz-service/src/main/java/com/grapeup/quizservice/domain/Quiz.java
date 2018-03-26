@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "quizzes")
@@ -30,9 +31,8 @@ public class Quiz extends BaseEntity {
     private long points;
     private boolean active;
     private boolean showResult;
-    private List<String> labels;
-    @DBRef
-    private List<Question> questions;
+    private List<String> labels = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
     public void addLabel(String label) {
         Assert.notNull(label, "Label cannot be null.");

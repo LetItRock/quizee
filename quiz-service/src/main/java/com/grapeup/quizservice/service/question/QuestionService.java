@@ -15,4 +15,6 @@ public interface QuestionService {
     List<QuestionDto> findQuesionsByLabels(List<String> labels);
 
     QuestionDto updateQuestion(String questionId, QuestionDto questionDto);
+
+    void deleteQuestion(String questionId);
 }

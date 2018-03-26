@@ -1,7 +1,9 @@
 package com.grapeup.quizservice.config;
 
 import com.grapeup.quizservice.domain.Question;
+import com.grapeup.quizservice.domain.Quiz;
 import com.grapeup.quizservice.dto.QuestionDto;
+import com.grapeup.quizservice.dto.QuizDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,14 @@ public class QuizConfig {
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addMappings(new PropertyMap<QuestionDto, Question>() {
+            @Override
+            protected void configure() {
+                skip().setId(null);
+                skip().setCreated(null);
+                skip().setUpdated(null);
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<QuizDto, Quiz>() {
             @Override
             protected void configure() {
                 skip().setId(null);

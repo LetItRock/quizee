@@ -55,6 +55,13 @@ public class QuestionServiceImpl implements QuestionService {
         return  modelMapper.map(questionRepository.save(questionToUpdate), QuestionDto.class);
     }
 
+    @Override
+    public void deleteQuestion(String questionId) {
+        Question questionToDelete = questionRepository.findOne(questionId);
+        Assert.notNull(questionToDelete, "Cannot find question with id: " + questionId);
+        questionRepository.delete(questionToDelete);
+    }
+
     private List<QuestionDto> convertToDtos(Page<Question> quizPage) {
         return convertToDtos(quizPage.getContent());
     }
