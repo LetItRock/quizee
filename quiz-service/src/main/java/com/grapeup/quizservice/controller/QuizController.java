@@ -1,5 +1,6 @@
 package com.grapeup.quizservice.controller;
 
+import com.grapeup.quizservice.dto.QuestionDto;
 import com.grapeup.quizservice.dto.QuizDto;
 import com.grapeup.quizservice.service.quiz.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,28 @@ public class QuizController {
     }
 
     @PutMapping("/{quizId}")
-    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
     public QuizDto updateQuiz(@PathVariable("quizId") String quizId, @RequestBody QuizDto quizDto) {
         return quizService.updateQuiz(quizId, quizDto);
     }
 
     @PostMapping("/create")
-    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
     public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
         return quizService.createQuiz(quizDto);
     }
 
     @DeleteMapping("/{quizId}")
-    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN')")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteQuiz(@PathVariable("quizId") String quizId) {
         quizService.deleteQuiz(quizId);
     }
+
+    @PostMapping("/{quizId}/questions")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
+    public QuizDto addQuestionToQuiz(@PathVariable("quizId") String quizId, @RequestBody QuestionDto questionDto) {
+        return quizService.addQuestionToQuiz(quizId, questionDto);
+    }
+
 }

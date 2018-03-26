@@ -1,5 +1,6 @@
 package com.grapeup.quizservice.service.question;
 
+import com.grapeup.quizservice.domain.Question;
 import com.grapeup.quizservice.dto.QuestionDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,6 @@ public interface QuestionService {
     QuestionDto updateQuestion(String questionId, QuestionDto questionDto);
 
     void deleteQuestion(String questionId);
+
+    Question getOrCreateQuestion(QuestionDto questionDto);
 }

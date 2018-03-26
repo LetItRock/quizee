@@ -26,10 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDto create(QuestionDto questionDto) {
-        Question question = getQuestionFromDto(questionDto);
-        question.setCreated(LocalDateTime.now());
-        question.setUpdated(LocalDateTime.now());
-        return modelMapper.map(questionRepository.save(question), QuestionDto.class);
+        return modelMapper.map(createQuestion(questionDto), QuestionDto.class);
     }
 
     @Override
@@ -47,8 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDto updateQuestion(String questionId, QuestionDto questionDto) {
-        Question questionToUpdate = questionRepository.findOne(questionId);
-        Assert.notNull(questionToUpdate, "Cannot find question with id: " + questionId);
+        Question questionToUpdate = getQuestionOrThrowException(questionId);
 
         modelMapper.map(questionDto, questionToUpdate);
 
@@ -57,9 +53,29 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void deleteQuestion(String questionId) {
+        Question questionToDelete = getQuestionOrThrowException(questionId);
+        questionRepository.delete(questionToDelete);
+    }
+
+    @Override
+    public Question getOrCreateQuestion(QuestionDto questionDto) {
+        if (questionDto.getId() == null) {
+            return createQuestion(questionDto);
+        }
+        return questionRepository.findOne(questionDto.getId());
+    }
+
+    private Question createQuestion(QuestionDto questionDto) {
+        Question question = getQuestionFromDto(questionDto);
+        question.setCreated(LocalDateTime.now());
+        question.setUpdated(LocalDateTime.now());
+        return questionRepository.save(question);
+    }
+
+    private Question getQuestionOrThrowException(String questionId) {
         Question questionToDelete = questionRepository.findOne(questionId);
         Assert.notNull(questionToDelete, "Cannot find question with id: " + questionId);
-        questionRepository.delete(questionToDelete);
+        return questionToDelete;
     }
 
     private List<QuestionDto> convertToDtos(Page<Question> quizPage) {

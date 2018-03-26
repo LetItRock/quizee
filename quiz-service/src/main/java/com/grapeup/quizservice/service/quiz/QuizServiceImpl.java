@@ -1,8 +1,10 @@
 package com.grapeup.quizservice.service.quiz;
 
 import com.grapeup.quizservice.domain.Quiz;
+import com.grapeup.quizservice.dto.QuestionDto;
 import com.grapeup.quizservice.dto.QuizDto;
 import com.grapeup.quizservice.repository.QuizRepository;
+import com.grapeup.quizservice.service.question.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class QuizServiceImpl implements QuizService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private QuestionService questionService;
 
     @Autowired
     private QuizRepository quizRepository;
@@ -40,8 +45,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public QuizDto updateQuiz(String quizId, QuizDto quizDto) {
-        Quiz quiz = quizRepository.findOne(quizId);
-        Assert.notNull(quiz, "Cannot find quiz with id: " + quizId);
+        Quiz quiz = getOrThrowException(quizId);
         quiz.setUpdated(LocalDateTime.now());
 
         quiz.setName(quizDto.getName());
@@ -58,9 +62,22 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public void deleteQuiz(String quizId) {
+        Quiz quiz = getOrThrowException(quizId);
+        quizRepository.delete(quiz);
+    }
+
+    @Override
+    public QuizDto addQuestionToQuiz(String quizId, QuestionDto questionDto) {
+        Quiz quiz = getOrThrowException(quizId);
+        quiz.addQuestion(questionService.getOrCreateQuestion(questionDto));
+
+        return modelMapper.map(quizRepository.save(quiz), QuizDto.class);
+    }
+
+    private Quiz getOrThrowException(String quizId) {
         Quiz quiz = quizRepository.findOne(quizId);
         Assert.notNull(quiz, "Cannot find quiz with id: " + quizId);
-        quizRepository.delete(quiz);
+        return quiz;
     }
 
     private List<QuizDto> convertToDtos(Page<Quiz> quizPage) {

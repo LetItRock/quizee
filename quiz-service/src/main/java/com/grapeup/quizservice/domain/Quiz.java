@@ -40,4 +40,11 @@ public class Quiz extends BaseEntity {
             labels.add(label);
         }
     }
+
+    public void addQuestion(Question question) {
+        Assert.notNull(question, "Question cannot be null.");
+        if(!questions.contains(question)) {
+            questions.add(question);
+        }
+    }
 }
