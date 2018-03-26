@@ -20,6 +20,6 @@ public class QuizDto {
     private boolean showResult;
     private List<String> labels;
     private List<QuestionDto> questions;
-    private LocalDateTime created = LocalDateTime.now();
-    private LocalDateTime updated = LocalDateTime.now();
+    private LocalDateTime created;
+    private LocalDateTime updated;
 }

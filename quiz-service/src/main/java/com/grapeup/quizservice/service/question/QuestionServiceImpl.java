@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,6 +43,16 @@ public class QuestionServiceImpl implements QuestionService {
     public List<QuestionDto> findQuesionsByLabels(List<String> labels) {
         List<Question> questions = questionRepository.findByLabelsIn(labels);
         return convertToDtos(questions);
+    }
+
+    @Override
+    public QuestionDto updateQuestion(String questionId, QuestionDto questionDto) {
+        Question questionToUpdate = questionRepository.findOne(questionId);
+        Assert.notNull(questionToUpdate, "Cannot find question with id: " + questionId);
+
+        modelMapper.map(questionDto, questionToUpdate);
+
+        return  modelMapper.map(questionRepository.save(questionToUpdate), QuestionDto.class);
     }
 
     private List<QuestionDto> convertToDtos(Page<Question> quizPage) {

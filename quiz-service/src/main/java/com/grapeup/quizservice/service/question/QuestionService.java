@@ -13,4 +13,6 @@ public interface QuestionService {
     Page<QuestionDto> qetQuestions(Pageable pagable);
 
     List<QuestionDto> findQuesionsByLabels(List<String> labels);
+
+    QuestionDto updateQuestion(String questionId, QuestionDto questionDto);
 }

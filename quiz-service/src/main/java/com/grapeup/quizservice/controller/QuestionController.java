@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/questions")
 public class QuestionController {
 
     @Autowired
@@ -33,5 +33,14 @@ public class QuestionController {
     @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
     public List<QuestionDto> findQuestionsByLabels(@RequestParam("name") List<String> labels) {
         return questionService.findQuesionsByLabels(labels);
+    }
+
+    @PutMapping("/{questionId}")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
+    public QuestionDto updateQuestion(
+            @PathVariable("questionId") String questionId,
+            @RequestBody QuestionDto questionDto
+    ) {
+        return questionService.updateQuestion(questionId, questionDto);
     }
 }
