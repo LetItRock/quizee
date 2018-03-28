@@ -179,6 +179,11 @@ public class AuthServerApplication {
 					.withClient("quiz-service")
 					.secret("quiz-service")
 					.authorizedGrantTypes("client_credentials", "refresh_token")
+					.scopes("server")
+				.and()
+					.withClient("fulfillment-service")
+					.secret("fulfillment-service")
+					.authorizedGrantTypes("client_credentials", "refresh_token")
 					.scopes("server");
 			// @formatter:on
 		}

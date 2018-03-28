@@ -39,5 +39,12 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    fulfillment-service:
+        path: /fulfillment/**
+        #url: http://localhost:8300
+        serviceId: fulfillment-service
+        stripPrefix: false
+        sensitiveHeaders:
+
 server:
   port: 4000

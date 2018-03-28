@@ -116,3 +116,29 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  fulfillment-service-mongodb:
+    environment:
+      MONGODB_PASSWORD: pass
+    image: letitrock/quizee-mongodb
+    restart: always
+    ports:
+      - 31000:27017 # TODO REMOVE FROM HERE
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  fulfillment-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: pass
+      MONGODB_PASSWORD: pass
+    image: letitrock/quizee-fulfillment-service
+    restart: always
+    depends_on:
+      - config-server
+      - fulfillment-service-mongodb
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

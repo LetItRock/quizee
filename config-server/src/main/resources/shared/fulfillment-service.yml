@@ -1,0 +1,28 @@
+# Defined auth server
+security:
+  oauth2:
+    client:
+      clientId: fulfillment-service
+      clientSecret: fulfillment-service #${QUIZ_SERVICE_PASSWORD}
+      accessTokenUri: http://auth-server:8000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      userInfoUri: http://auth-server:8000/uaa/users/current
+
+# DB CONFIGURATION
+spring:
+  data:
+    mongodb:
+      host: fulfillment-service-mongodb
+      username: user
+      password: ${MONGODB_PASSWORD}
+      database: quizee
+      port: 27017
+
+some:
+  value: 'Pupa'
+
+server:
+  context-path: /fulfillment
+  port: 8300
