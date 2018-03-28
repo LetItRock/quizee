@@ -15,4 +15,6 @@ public interface QuizService {
     void deleteQuiz(String quizId);
 
     QuizDto addQuestionToQuiz(String quizId, QuestionDto questionDto);
+
+    void removeQuestionFromQuiz(String quizId, String questionId);
 }

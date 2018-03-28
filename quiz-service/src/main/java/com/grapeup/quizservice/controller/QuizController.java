@@ -50,4 +50,13 @@ public class QuizController {
         return quizService.addQuestionToQuiz(quizId, questionDto);
     }
 
+    @DeleteMapping("/{quizId}/questions/{questionId}")
+    @PreAuthorize("#oauth2.hasScope('ui') and hasRole('ADMIN') or #oauth2.hasScope('server')")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeQuestionFromQuiz(
+            @PathVariable("quizId") String quizId,
+            @PathVariable("questionId") String questionId
+    ) {
+        quizService.removeQuestionFromQuiz(quizId, questionId);
+    }
 }

@@ -1,5 +1,6 @@
 package com.grapeup.quizservice.service.quiz;
 
+import com.grapeup.quizservice.domain.Question;
 import com.grapeup.quizservice.domain.Quiz;
 import com.grapeup.quizservice.dto.QuestionDto;
 import com.grapeup.quizservice.dto.QuizDto;
@@ -15,6 +16,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,6 +74,13 @@ public class QuizServiceImpl implements QuizService {
         quiz.addQuestion(questionService.getOrCreateQuestion(questionDto));
 
         return modelMapper.map(quizRepository.save(quiz), QuizDto.class);
+    }
+
+    @Override
+    public void removeQuestionFromQuiz(String quizId, String questionId) {
+        Quiz quiz = getOrThrowException(quizId);
+        quiz.getQuestions().removeIf(question -> question.getId().equals(questionId));
+        quizRepository.save(quiz);
     }
 
     private Quiz getOrThrowException(String quizId) {
